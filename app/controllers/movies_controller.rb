@@ -25,6 +25,10 @@ class MoviesController < ApplicationController
     elsif @sort_by == 'release_date'
       @movies.order!(:release_date)
     end
+
+    if params[:ratings] != session[:ratings] && params[:sort_by] != session[:sort_by]
+      redirect_to movies_path(ratings: session[:ratings], sort_by: session[:sort_by])
+    end
   end
 
   def new
